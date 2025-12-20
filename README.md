@@ -1,5 +1,11 @@
-/almastock
-│
+# AlmaStock
+
+Sistema de gestión de inventario desarrollado en PHP, MySQL y JavaScript.
+
+## 📂 Estructura del proyecto
+
+```text
+almastock/
 ├── frontend/
 │   ├── index.html
 │   ├── login.html
@@ -14,7 +20,6 @@
 │       ├── productos.js
 │       ├── movimientos.js
 │       └── dashboard.js
-│
 ├── backend/
 │   ├── config/
 │   │   └── db.php
@@ -30,6 +35,6 @@
 │   │   └── salida.php
 │   └── usuarios/
 │       └── crear.php
-│
-└── database/
-    └── almastock.sql
+├── database/
+│   └── almastock.sql
+└── README.md
