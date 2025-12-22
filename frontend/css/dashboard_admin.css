@@ -1,0 +1,98 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: #f4f7fb;
+}
+
+.layout {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 240px;
+    background: #0b1d3a;
+    color: #fff;
+    padding: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 10px;
+    color: #b5c7e3;
+    text-decoration: none;
+}
+
+.sidebar a.active {
+    background: #2563eb;
+    border-radius: 8px;
+    color: #fff;
+}
+
+/* Main */
+.content {
+    flex: 1;
+    padding: 25px;
+}
+
+/* Cards */
+.cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 14px;
+    box-shadow: 0 10px 20px rgba(0,0,0,.05);
+}
+
+.card.warning { background: #fff4e5; }
+.card.money { background: #e9f7f4; }
+.card.success { background: #eafaf1; }
+
+.number {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+/* Boxes */
+.box {
+    background: #fff;
+    margin-top: 25px;
+    padding: 20px;
+    border-radius: 14px;
+}
+
+.movement {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+/* Alerts */
+.alert {
+    margin-top: 15px;
+}
+
+.bar {
+    height: 8px;
+    background: #eee;
+    border-radius: 10px;
+}
+
+.bar span {
+    display: block;
+    height: 100%;
+    background: orange;
+    border-radius: 10px;
+}
+
+.alert.danger .bar span {
+    background: red;
+}
+
+.green { color: green; }
+.red { color: red; }

@@ -14,6 +14,7 @@ CREATE TABLE productos (
     nombre VARCHAR(150),
     codigo VARCHAR(50) UNIQUE,
     stock INT DEFAULT 0,
+    stock_minimo INT DEFAULT 0,
     precio DECIMAL(10,2)
 );
 

@@ -14,9 +14,9 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
 
     if (result.status === "ok") {
         if (result.rol === "admin") {
-            window.location.href = "dashboard_admin.html";
+            window.location.href = "dashboard_admin.php";
         } else {
-            window.location.href = "dashboard_operador.html";
+            window.location.href = "dashboard_operador.php";
         }
     } else {
         document.getElementById("msg").innerText = "Credenciales incorrectas";
