@@ -96,3 +96,21 @@ body {
 
 .green { color: green; }
 .red { color: red; }
+
+
+/* esto son los estilo de la sección de productos con stock bajo */
+.stock-bajo-list {
+    margin-top: 10px;
+    padding-left: 18px;
+    font-size: 14px;
+}
+
+.stock-bajo-list li {
+    margin-bottom: 6px;
+    color: #b91c1c;
+}
+
+.card.warning .ok {
+    color: #15803d;
+    font-weight: 500;
+}

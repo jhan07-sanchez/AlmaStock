@@ -1,5 +1,8 @@
 <?php
 require_once '../backend/auth/proteger.php';
+require_once '../backend/auth/roles.php';
+requireRol('admin');
+
 require_once '../backend/dashboard/kpis.php';
 require_once '../backend/dashboard/movimientos_recientes.php';
 require_once '../backend/dashboard/alertas_stock.php';
@@ -24,7 +27,7 @@ require_once '../backend/dashboard/alertas_stock.php';
             <a class="active" href="dashboard_admin.php">Dashboard</a>
             <a href="#" onclick="cargarVista('productos/productos.php')">Productos</a>
             <a href="movimientos.php">Movimientos</a>
-            <a href="usuarios.php">Usuarios</a>
+            <a href="#" onclick="cargarVista('usuarios/usuarios.php')">Usuarios</a>
             <a href="configuracion.php">Configuración</a>
         </nav>
 
@@ -63,10 +66,22 @@ require_once '../backend/dashboard/alertas_stock.php';
 
             <div class="card warning">
                 <h4>Stock Bajo</h4>
-                <p class="number">
-                    <?= $stockBajo ?? 0 ?>
-                </p>
+                <p class="number"><?= $stockBajo ?></p>
+
+                <?php if ($stockBajo > 0): ?>
+                    <ul class="stock-bajo-list">
+                        <?php while ($p = $productosBajo->fetch_assoc()): ?>
+                            <li>
+                                <strong><?= htmlspecialchars($p['nombre']) ?></strong>
+                                — <?= $p['stock'] ?> / mín <?= $p['stock_minimo'] ?>
+                            </li>
+                        <?php endwhile; ?>
+                    </ul>
+                <?php else: ?>
+                    <p class="ok">Todo en orden 👌</p>
+                <?php endif; ?>
             </div>
+
 
             <div class="card money">
                 <h4>Valor Total</h4>
@@ -125,9 +140,31 @@ require_once '../backend/dashboard/alertas_stock.php';
             <?php endif; ?>
         </section>
 
+        <section class="card">
+            <h3>📋 Auditoría del Sistema</h3>
+
+            <table class="tabla">
+                <thead>
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Usuario</th>
+                        <th>Acción</th>
+                        <th>Detalle</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaAuditoria">
+                    <tr>
+                        <td colspan="4">Cargando auditoría...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
     </main>
     <script src="js/dashboard_admin.js"></script>
     <script src="js/productos.js"></script>
+    <script src="js/usuarios.js"></script>
 </div>
 </body>
 </html>

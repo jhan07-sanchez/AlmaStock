@@ -8,6 +8,12 @@ $totalProductos = $q1->fetch_assoc()['total'] ?? 0;
 // STOCK BAJO: stock menor o igual al stock mínimo de cada producto
 $q2 = $conexion->query("SELECT COUNT(*) AS total FROM productos WHERE stock <= stock_minimo");
 $stockBajo = $q2->fetch_assoc()['total'] ?? 0;
+$productosBajo = $conexion->query("
+    SELECT nombre, stock, stock_minimo
+    FROM productos
+    WHERE stock <= stock_minimo
+    ORDER BY stock ASC
+");
 
 
 // VALOR TOTAL INVENTARIO
@@ -21,3 +27,7 @@ $q4 = $conexion->query("
     WHERE DATE(fecha) = CURDATE()
 ");
 $movimientosHoy = $q4->fetch_assoc()['total'] ?? 0;
+
+
+
+

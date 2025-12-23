@@ -1,26 +1,31 @@
 <?php
 session_start();
-include("../config/db.php");
+require_once "../config/db.php";
 
-$email = $_POST['email'];
-$password = $_POST['password'];
+$email = $_POST['email'] ?? '';
+$password = $_POST['password'] ?? '';
 
-$sql = "SELECT * FROM usuarios WHERE email = ?";
+$sql = "SELECT id, nombre, email, password, rol FROM usuarios WHERE email = ?";
 $stmt = $conexion->prepare($sql);
 $stmt->bind_param("s", $email);
 $stmt->execute();
 
-$resultado = $stmt->get_result();
-$usuario = $resultado->fetch_assoc();
+$usuario = $stmt->get_result()->fetch_assoc();
 
 if ($usuario && password_verify($password, $usuario['password'])) {
-    $_SESSION['user_id'] = $usuario['id'];
-    $_SESSION['rol'] = $usuario['rol'];
+
+    $_SESSION['usuario'] = [
+        'id'     => $usuario['id'],
+        'nombre' => $usuario['nombre'],
+        'email'  => $usuario['email'],
+        'rol'    => $usuario['rol']
+    ];
 
     echo json_encode([
         "status" => "ok",
-        "rol" => $usuario['rol']
+        "rol"    => $usuario['rol']
     ]);
-} else {
-    echo json_encode(["status" => "error"]);
+    exit;
 }
+
+echo json_encode(["status" => "error"]);

@@ -24,3 +24,37 @@ function cargarFormularioProducto() {
         });
 }
 
+
+
+
+
+async function cargarAuditoria() {
+    const res = await fetch("../backend/auditoria/listar.php");
+    const data = await res.json();
+
+    const tbody = document.getElementById("tablaAuditoria");
+    tbody.innerHTML = "";
+
+    if (data.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="4">No hay registros</td>
+            </tr>
+        `;
+        return;
+    }
+
+    data.forEach(item => {
+        tbody.innerHTML += `
+            <tr>
+                <td>${item.fecha}</td>
+                <td>${item.usuario}</td>
+                <td>${item.accion}</td>
+                <td>${item.detalle}</td>
+            </tr>
+        `;
+    });
+}
+
+// Ejecutar al cargar el dashboard
+cargarAuditoria();
